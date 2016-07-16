@@ -7,7 +7,7 @@ import GuestEntry from './GuestEntry'
 export default class Guests extends React.Component {
 
 	render() {
-		const {guestStore} = this.props.route
+		const {guestStore} = this.props.route.state
 
 		return (
 			<div>

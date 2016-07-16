@@ -14,7 +14,7 @@ Object.assign(styles, jumbotron, container, buttons)
 @observer
 class App extends React.Component {
 	render() {
-		const {guestStore} = this.props.route
+		const {guestStore} = this.props.route.state
 		return (
 			<div className={styles.container}>
 				<DevTool/>
