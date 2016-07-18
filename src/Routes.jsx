@@ -5,6 +5,7 @@ import App from './components/App'
 import About from './components/About'
 import Guests from './components/Guests'
 import Node from './components/Node'
+import Blocks from './components/Blocks'
 
 export default(state) => {
 	return (
@@ -12,6 +13,7 @@ export default(state) => {
 			<IndexRoute component={About}/>
 			<Route path="guests" component={Guests} state={state}/>
 			<Route path="node" component={Node} state={state}/>
+			<Route path="blocks" component={Blocks} state={state}/>
 		</Route>
 	)
 }

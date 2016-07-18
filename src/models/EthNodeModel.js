@@ -1,20 +1,28 @@
-import {
-    observable
-} from 'mobx'
+import {observable} from 'mobx'
 import Web3 from 'web3'
+import times from 'lodash/times'
 
 export default class EthNodeModel {
     store
     @observable nodeConnected
-    @observable blocks
     @observable rpcAddress
-    @observable latestBlock
+    @observable latestBlockNumber
+    @observable latestBlocks
     web3
 
     constructor(store) {
         this.store = store
-        this.blocks = []
-        this.latestBlock = 0
+        this.latestBlocks = []
+        this.latestBlockNumber = 0
+    }
+
+
+    setRpcAddress(rpcAddress) {
+        this.rpcAddress = rpcAddress
+        this.web3 = new Web3(new Web3.providers.HttpProvider(rpcAddress))
+        this.latestBlockNumber = this.web3.eth.blockNumber
+        this.watchForNewBlocks()
+        this.loadLatestBlocks()
     }
 
     watchForNewBlocks() {
@@ -22,22 +30,21 @@ export default class EthNodeModel {
         filter.watch((error, hash) => {
             if (!error) {
               var block = this.web3.eth.getBlock(hash, true)
-              this.blocks.push(block)
-              this.latestBlock = block.number
+              this.latestBlocks.push(block)
+              this.latestBlockNumber = block.number
             }
         });
     }
 
-    setRpcAddress(rpcAddress) {
-        this.rpcAddress = rpcAddress
-        this.web3 = new Web3(new Web3.providers.HttpProvider(rpcAddress))
-        this.latestBlock = this.web3.eth.blockNumber
-        this.watchForNewBlocks()
-    }
-
     loadLatestBlocks() {
-        var eth = this.web3.eth
-        var latest = eth.blockNumber
+        const eth = this.web3.eth
+        const latest = eth.blockNumber
+        times(50, (index) => {
+          const blockToGet = latest - index;
+          this.latestBlocks.push(
+            this.web3.eth.getBlock(blockToGet, true)
+          )
+        })
     }
 
 }

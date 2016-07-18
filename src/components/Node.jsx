@@ -11,7 +11,7 @@ export default class Node extends React.Component {
 		return (
 			<div>
 				<div>node details</div>
-        <div>Latest Block {ethStore.latestBlock}</div>
+        <div>Latest Block {ethStore.latestBlockNumber}</div>
         <RpcEntry state={this.props.route.state} />
 		</div>
 		)

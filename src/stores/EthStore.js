@@ -6,11 +6,12 @@ export default class EthStore {
 
   @observable node
 
-  @computed get latestBlock() {
-    if (this.node) {
-      return this.node.latestBlock;
-    }
-    return 0;
+  @computed get latestBlockNumber() {
+    return (this.node ? this.node.latestBlockNumber : 0)
+  }
+
+  @computed get latestBlocks() {
+    return (this.node ? this.node.latestBlocks : [])
   }
 
   setRpcAddress(address) {

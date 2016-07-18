@@ -17,6 +17,7 @@ class NavigationBar extends React.Component {
 							<NavItem to='/' index={true} >Home</NavItem>
 							<NavItem to='/guests'>Guests</NavItem>
 							<NavItem to='/node'>Node</NavItem>
+							<NavItem to='/blocks'>Blocks</NavItem>
 						</ul>
 					</div>
 				</div>
