@@ -21,7 +21,7 @@ export default class EthNodeModel {
         var filter = this.web3.eth.filter('latest')
         filter.watch((error, hash) => {
             if (!error) {
-              var block = this.web3.getBlock(hash, true)
+              var block = this.web3.eth.getBlock(hash, true)
               this.blocks.push(block)
               this.latestBlock = block.number
             }
