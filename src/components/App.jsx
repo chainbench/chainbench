@@ -4,6 +4,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import DevTool from 'mobx-react-devtools'
 import {observer} from 'mobx-react'
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 import About from './About'
 import NavigationBar from './NavigationBar'
@@ -21,7 +23,8 @@ class App extends React.Component {
 				<NavigationBar/>
 				<div className={styles.appHeading}>
 					<h1>An App</h1>
-					<p>You have a total of {guestStore.guestCount} guests.</p>
+					<RaisedButton label="Default" />
+					<p>You have a total of {guestStore.guestCount} guests.   </p>
 					{this.props.children}
 				</div>
 
